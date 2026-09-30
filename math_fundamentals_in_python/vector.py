@@ -20,7 +20,10 @@ class Vector:
         return Vector([x/mag for x in self.components])
 
     def cosine_similarity(self, other):
-        return self.dot(other) / (self.magnitude() / other.magnitude())
+        magnitude_product = self.magnitude() * other.magnitude()
+        if magnitude_product == 0:
+            raise ValueError("Cosine similarity is undefined for zero vectors")
+        return self.dot(other) / magnitude_product
 
     def __repr__(self) -> str:
         return f"Vector({self.components})"
